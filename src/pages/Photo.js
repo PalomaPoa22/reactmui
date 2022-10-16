@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Container,Typography } from "@material-ui/core";
+import { Container,Typography,Grid } from "@material-ui/core";
 import { useParams } from "react-router-dom";
 import CardFoto from "../components/CardPhoto/CardPhoto";
 const useStyles = makeStyles((theme)=>({
@@ -22,6 +22,9 @@ const useStyles = makeStyles((theme)=>({
   pos: {
     marginBottom: 12,
   },
+  card: {
+    margin: theme.spacing(2),
+  },
 }));
 const Photo = () => {
   const classes = useStyles();
@@ -30,7 +33,8 @@ const Photo = () => {
   console.log(usuario)
   useEffect(() => {
     axios
-      .get(`https://jsonplaceholder.typicode.com/photos/${id}`)
+      
+      .get(`https://jsonplaceholder.typicode.com/albums/${id}/photos`)
       .then((response) => {
         setUsuario(response.data);
       });
@@ -45,16 +49,21 @@ const Photo = () => {
         >
        Foto
         </Typography>
-        
+        <Grid container>
+        {usuario.map((item) => (  
+            <Grid item xs={12} md={4}>
       <CardFoto
-        key={usuario.id}
-        id={usuario.id}
-        albumId={usuario.albumId}
-        url={`${usuario.url}`}
-        title={usuario.title}
-        thumbnailUrl={usuario.thumbnailUrl}      
+        key={item.id}
+        id={item.id}
+        albumId={item.albumId}
+        url={`${item.url}`}
+        title={item.title}
+        thumbnailUrl={item.thumbnailUrl}      
         
       />
+      </Grid>
+      ))}
+    </Grid>
     </Container>
   );
 };

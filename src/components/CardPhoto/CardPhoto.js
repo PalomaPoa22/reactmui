@@ -45,8 +45,8 @@ export default function CardPhoto({ albumId, id, title, url, thumbnailUrl }) {
             color="textSecondary"
             gutterBottom
           >
-            <strong>Album : </strong> {id} <br />
-            <strong>Id : </strong> {albumId} <br />
+            <strong>Album : </strong> {albumId} <br />
+            <strong>Id : </strong> {id} <br />
             <strong>title : </strong> {title}
           </Typography>
           <CardMedia
@@ -58,7 +58,12 @@ export default function CardPhoto({ albumId, id, title, url, thumbnailUrl }) {
           <img src={thumbnailUrl} alt="imagem" />
         </CardContent>
         <CardActions>
-          <Link to={`/details/${id}/albums`} target="_blank" className={classes.btn}>
+          <Link
+            to={`/details/${albumId}/albums`}
+           
+            target="_blank"
+            className={classes.btn}
+          >
             {" "}
             <ArrowBackIcon color="secondary" />
           </Link>
